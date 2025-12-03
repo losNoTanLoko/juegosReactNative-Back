@@ -1,4 +1,3 @@
-// server.js
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -8,7 +7,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Conexión a MongoDB (cambiar MONGO_URI en .env)
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("Conectado a MongoDB"))
     .catch(err => console.log("Mongo error:", err));

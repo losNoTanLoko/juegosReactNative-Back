@@ -22,13 +22,13 @@ router.post('/', auth, async (req, res) => {
 
 // GET /api/scores/top?limit=10 => ranking (público)
 router.get('/top', async (req, res) => {
-  try {
-    const limit = parseInt(req.query.limit) || 10;
-    const top = await Score.find().sort({ score: -1, time: 1 }).limit(limit).lean();
-    res.json(top);
+   try {
+    const userId = req.user.id;
+    const scores = await Score.find({ userId }).sort({ score: -1, time: 1 }).lean();
+    res.json(scores);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Error obteniendo ranking' });
+    res.status(500).json({ message: 'Error obteniendo puntajes' });
   }
 });
 
